@@ -35,16 +35,11 @@ parameters:
     heat_domain_admin_password: JOTzBQUwuinlRY9R
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    ceilometer_version: ${_param:openstack_version}
-    ceilometer_service_host: ${_param:openstack_telemetry_address}
-    ceilometer_influxdb_password: JSPFeF3RtZ6vrSXW
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
     neutron_service_host: ${_param:openstack_control_address}
     glusterfs_service_host: ${_param:infra_kvm_address}
-    aodh_version: ${_param:openstack_version}
-    aodh_service_host: ${_param:openstack_telemetry_address}
 
     mysql_admin_user: root
     mysql_aodh_password: JNfcU7xDhCRvU9Uh
@@ -66,18 +61,12 @@ parameters:
     keystone_neutron_password: gqmGfqcCuG0Xo1E8
     keystone_nova_password: x1fpvTPNRY8YRfmM
     keystone_aodh_password: N01yguN0KUy193KJ
-    ceilometer_secret_key: EcPzNk1Oajnty2NP
     horizon_version: ${_param:openstack_version}
     horizon_secret_key: G96foru6O91ef2kKOh0YZkmmOfTG2iX3oRCU6wP9jwtF1XScLdh6gJXwBSU9YDNH
     horizon_identity_host: ${_param:openstack_control_address}
     horizon_identity_encryption: none
     horizon_identity_version: 2
-    mongodb_server_replica_set: ceilometer
-    mongodb_ceilometer_password: K7F7Y1dCku3fo7K9
-    mongodb_admin_password: jisAztq5u7QzMj5e
-    mongodb_shared_key: 3cVSRNXEOUf1b88393Bmo7bfjnpdVHGwESWIjr9adJWIvxsCAr5sOpktyF2BxRMS
     metadata_password: 70M5JGD113wRIOKs
-    openstack_telemetry_keepalived_password: Cp4AY5gmP1SLYEmd
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
     openstack_notification_topics: notifications
 
@@ -98,10 +87,6 @@ parameters:
     openstack_message_queue_node02_address: 10.10.2.42
     openstack_message_queue_node03_address: 10.10.2.43
 
-    openstack_telemetry_address: 10.10.2.75
-    openstack_telemetry_node01_address: 10.10.2.76
-    openstack_telemetry_node02_address: 10.10.2.77
-    openstack_telemetry_node03_address: 10.10.2.78
     openstack_gateway_node01_address: 10.10.2.224
     openstack_gateway_node02_address: 10.10.2.225
     openstack_gateway_node03_address: 10.10.2.226
@@ -130,16 +115,10 @@ parameters:
     openstack_message_queue_node01_hostname: msg01
     openstack_message_queue_node02_hostname: msg02
     openstack_message_queue_node03_hostname: msg03
-    openstack_telemetry_hostname: mdb
-    openstack_telemetry_node01_hostname: mdb01
-    openstack_telemetry_node02_hostname: mdb02
-    openstack_telemetry_node03_hostname: mdb03
     openstack_gateway_node01_hostname: gtw01
     openstack_gateway_node02_hostname: gtw02
     openstack_gateway_node03_hostname: gtw03
 
-    openstack_benchmark_node01_hostname: bmk01
-    openstack_benchmark_node01_address: 10.10.2.85
 
     # Billing
     #keystone_billometer_password: yLu4OZuj1SEP7orp
@@ -228,26 +207,6 @@ parameters:
           names:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
-        mdb:
-          address: ${_param:openstack_telemetry_address}
-          names:
-          - ${_param:openstack_telemetry_hostname}
-          - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
-        mdb01:
-          address: ${_param:openstack_telemetry_node01_address}
-          names:
-          - ${_param:openstack_telemetry_node01_hostname}
-          - ${_param:openstack_telemetry_node01_hostname}.${_param:cluster_domain}
-        mdb02:
-          address: ${_param:openstack_telemetry_node02_address}
-          names:
-          - ${_param:openstack_telemetry_node02_hostname}
-          - ${_param:openstack_telemetry_node02_hostname}.${_param:cluster_domain}
-        mdb03:
-          address: ${_param:openstack_telemetry_node03_address}
-          names:
-          - ${_param:openstack_telemetry_node03_hostname}
-          - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
         gtw01:
           address: ${_param:openstack_gateway_node01_address}
           names:
