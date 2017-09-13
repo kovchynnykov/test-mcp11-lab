@@ -21,6 +21,7 @@ parameters:
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: eth1
     primary_second_nic: eth2
+    ceilometer_secret_key: somethinguseless
   linux:
     network:
       interface:
