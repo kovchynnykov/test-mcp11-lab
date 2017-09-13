@@ -4,7 +4,6 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.nova.compute.cluster
-- system.ceilometer.agent.cluster
 - system.nova.compute.notification.messagingv2
 - system.neutron.compute.cluster
 - cluster.mcp11ovs.infra
@@ -21,7 +20,6 @@ parameters:
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: eth1
     primary_second_nic: eth2
-    ceilometer_secret_key: somethinguseless
   linux:
     network:
       interface:
