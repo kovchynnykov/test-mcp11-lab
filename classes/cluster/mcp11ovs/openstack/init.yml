@@ -42,10 +42,8 @@ parameters:
     glusterfs_service_host: ${_param:infra_kvm_address}
 
     mysql_admin_user: root
-    mysql_aodh_password: JNfcU7xDhCRvU9Uh
     mysql_admin_password: ${_param:galera_server_admin_password}
     mysql_cinder_password: 5xMUbK0mbzYIFpFy
-    mysql_ceilometer_password: VAay1OD7uXnhNqoM
     mysql_glance_password: 1C2Kdmb4apg9XKk1
     mysql_heat_password: k5lBA8bfFqVEJdsp
     mysql_keystone_password: ZjT5aqb60Fda9m9H
@@ -53,14 +51,12 @@ parameters:
     mysql_nova_password: JkeWYaFLBXJF9jrc
     keystone_service_token: HZ0TjQact45rZLd5
     keystone_admin_password: e4GXQfOFRwrC61h7
-    keystone_ceilometer_password: qaMufLS7P6dhCkts
     keystone_cinder_password: zz9uLk4YOpwC17vz
     keystone_glance_password: dIKgmAiuzOYKezqd
     keystone_heat_password: Wv69mDAJFVthNSsk
     keystone_keystone_password: pEIKfxH6QN5xYUH7
     keystone_neutron_password: gqmGfqcCuG0Xo1E8
     keystone_nova_password: x1fpvTPNRY8YRfmM
-    keystone_aodh_password: N01yguN0KUy193KJ
     horizon_version: ${_param:openstack_version}
     horizon_secret_key: G96foru6O91ef2kKOh0YZkmmOfTG2iX3oRCU6wP9jwtF1XScLdh6gJXwBSU9YDNH
     horizon_identity_host: ${_param:openstack_control_address}
