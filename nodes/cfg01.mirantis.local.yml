@@ -3,8 +3,8 @@ classes:
 - cluster.mcp11ovs.infra.config
 parameters:
   _param:
-  linux_system_codename: xenial
-  reclass_data_revision: master
+    linux_system_codename: xenial
+    reclass_data_revision: master
   linux:
     system:
       name: cfg01
