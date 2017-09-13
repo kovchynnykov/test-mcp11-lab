@@ -1,0 +1,56 @@
+classes:
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
+- system.nova.compute.cluster
+- system.ceilometer.agent.cluster
+- system.nova.compute.notification.messagingv2
+- system.neutron.compute.cluster
+- cluster.mcp11ovs.infra
+parameters:
+  _param:
+    cluster_vip_address: ${_param:openstack_control_address}
+    cluster_local_address: ${_param:single_address}
+    cluster_node01_hostname: ${_param:openstack_control_node01_hostname}
+    cluster_node01_address: ${_param:openstack_control_node01_address}
+    cluster_node02_hostname: ${_param:openstack_control_node02_hostname}
+    cluster_node02_address: ${_param:openstack_control_node02_address}
+    cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
+    cluster_node03_address: ${_param:openstack_control_node03_address}
+    nova_vncproxy_url: https://${_param:cluster_public_host}:6080
+    primary_first_nic: eth1
+    primary_second_nic: eth2
+  linux:
+    network:
+      interface:
+        eth1:
+          mtu: 1500 
+          enabled: true
+          type: eth
+          proto: manual
+          name: ${_param:primary_first_nic}
+        eth0.1:
+          name: eth0.${_param:control_vlan}
+          enabled: true
+          type: vlan
+          proto: static
+          address: ${_param:single_address}
+          netmask: ${_param:control_network_netmask}
+          use_interfaces:
+          - eth0
+        eth1.2:
+          name: eth1.${_param:tenant_vlan}
+          enabled: true
+          type: vlan
+          proto: manual
+          use_interfaces:
+          - eth1
+        br-mesh:
+          enabled: true
+          type: bridge
+          address: ${_param:tenant_address}
+          netmask: ${_param:tenant_network_netmask}
+          use_interfaces:
+          - eth1.${_param:tenant_vlan}
+      bridge: openvswitch
