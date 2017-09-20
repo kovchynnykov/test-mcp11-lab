@@ -46,7 +46,7 @@ parameters:
     infra_maas_node01_hostname: mas01
     maas_admin_username: mirantis
     maas_admin_password: Bacze5VkJowJANBM
-    maas_db_password: REPLACE_BY_GENERATED_VALUE_DURING_INSTALL
+    maas_db_password: POTKscwqzrMn
     infra_kvm_address: 10.0.1.240
     infra_kvm_node01_address: 10.0.1.241
     infra_kvm_node02_address: 10.0.1.242
