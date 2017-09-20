@@ -34,7 +34,7 @@ parameters:
     keepalived_vip_virtual_router_id: 69
     deploy_nic: eth0
     primary_first_nic: eth1
-    primary_second_nic: eth2
+#    primary_second_nic: eth2
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
@@ -146,12 +146,12 @@ parameters:
           proto: manual
           name: ${_param:primary_first_nic}
           master: bond0
-        eth2:
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
+#        eth2:
+#          enabled: true
+#          type: slave
+#          proto: manual
+#          name: ${_param:primary_second_nic}
+#          master: bond0
         br_mgm:
           enabled: true
           proto: static
@@ -170,8 +170,8 @@ parameters:
           type: bond
           use_interfaces:
           - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
+#          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} #${_param:primary_second_nic}
           mode: active-backup
         bond0.1:
           name: bond0.${_param:control_vlan}
