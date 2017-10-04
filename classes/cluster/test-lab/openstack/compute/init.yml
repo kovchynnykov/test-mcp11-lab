@@ -19,55 +19,53 @@ parameters:
     cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
-    primary_first_nic: eth1
-    primary_second_nic: eth2
+    primary_first_nic: ens4
+    deploy_nic: ens3
+    tenant_nic: ens5
+    nic_mtu: 1450
   linux:
     network:
       interface:
-        eth1:
-          mtu: 9000
+        dhcp-if:
+          mtu: ${_param:nic_mtu}
           enabled: true
-          type: slave
+          type: eth 
+          proto: manual
+          name: ${_param:deploy_nic}
+        ctl-nic:
+          mtu: ${_param:nic_mtu}
+          enabled: true
+          type: eth
           proto: manual
           name: ${_param:primary_first_nic}
-          master: bond0
-        eth2:
-          mtu: 9000
+        tenant-nic:
+          mtu: ${_param:nic_mtu}
           enabled: true
-          type: slave
+          type: eth
           proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
-        bond0:
+          name: ${_param:tenant_nic}
+        br-mesh:
           enabled: true
-          proto: manual
-          type: bond
+          type: bridge
+          proto: static
+          address: ${_param:tenant_address}
+          netmask: ${_param:tenant_network_netmask}
           use_interfaces:
-          - ${_param:primary_second_nic}
-          - ${_param:primary_first_nic}
-          slaves: ${_param:primary_second_nic} ${_param:primary_first_nic}
-          mode: active-backup
-        bond0.1:
-          name: bond0.${_param:control_vlan}
+          - ${_param:tenant_nic}
+        br_ctl:
+          mtu: ${_param:nic_mtu}
           enabled: true
-          type: vlan
+          type: bridge
           proto: static
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
           use_interfaces:
-          - bond0
-        bond0.2:
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          type: vlan
-          proto: manual
-          use_interfaces:
-          - bond0
-        br-mesh:
+          - ${_param:primary_first_nic}
+        br_mgm:
+          mtu: ${_param:nic_mtu}
           enabled: true
           type: bridge
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
+          proto: dhcp
           use_interfaces:
-          - bond0.${_param:tenant_vlan}
+          - ${_param:deploy_nic}
       bridge: openvswitch

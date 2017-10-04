@@ -144,4 +144,12 @@ parameters:
     network:
       interface:
         ens3: ${_param:linux_single_interface}
-
+  docker:
+    swarm:
+      network:
+        docker_gwbridge:
+          opt:
+            com.docker.network.driver.mtu: 1450
+    host:
+      options:
+        mtu: 1450

@@ -9,57 +9,70 @@ classes:
 - cluster.test-lab.infra
 parameters:
   _param:
-    interface_mtu: 1500
+    interface_mtu: 1450
     cluster_vip_address: ${_param:openstack_control_address}
 
     linux_system_codename: xenial
     keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
-    primary_first_nic: eth1
-    primary_second_nic: eth2
+    primary_first_nic: ens5
+    tenant_nic: ens3
+    deploy_nic: ens4
   linux:
     network:
       bridge: openvswitch
       interface:
-        eth1:
+        control-eth:
           enabled: true
-          type: slave
+          type: eth
           proto: manual
           name: ${_param:primary_first_nic}
-          master: bond0
-        eth2:
+          mtu: ${_param:interface_mtu}
+        tenant-eth:
           enabled: true
-          type: slave
+          type: eth
           proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
-        bond0:
+          name: ${_param:tenant_nic}
+          mtu: ${_param:interface_mtu}
+        deploy-eth:
           enabled: true
+          type: eth
           proto: manual
-          ovs_bridge: br-floating
-          ovs_type: OVSPort
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: active-backup
+          name: ${_param:deploy_nic}
+          mtu: ${_param:interface_mtu}
         br-floating:
           enabled: true
           type: ovs_bridge
-        br-ctl:
+          mtu: ${_param:interface_mtu}
+        float-to-ex:
           enabled: true
           type: ovs_port
+          mtu: ${_param:interface_mtu}
           bridge: br-floating
+        br_mgm:
+          enabled: true
+          type: bridge
+          proto: dhcp
+          mtu: ${_param:interface_mtu}
+          use_interfaces:
+          - ${_param:deploy_nic}
+          use_ovs_ports:
+          - float-to-ex
+        br_ctl:
+          enabled: true
+          type: bridge
           proto: static
-          ovs_options: tag=${_param:control_vlan}
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
+          mtu: ${_param:interface_mtu}
+          use_interfaces:
+          - ${_param:primary_first_nic}
         br-mesh:
           enabled: true
-          type: ovs_port
-          bridge: br-floating
+          type: bridge
+          mtu: ${_param:interface_mtu}
           proto: static
-          ovs_options: tag=${_param:tenant_vlan}
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
+          use_interfaces:
+          - ${_param:tenant_nic}
