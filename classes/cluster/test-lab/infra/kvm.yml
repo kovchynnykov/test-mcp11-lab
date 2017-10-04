@@ -90,7 +90,7 @@ parameters:
           disk_profile: xxlarge
           net_profile: default
         cicd.control:
-          cpu: 4
+          cpu: 8
           ram: 8192
           disk_profile: large
           net_profile: default
