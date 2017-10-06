@@ -29,7 +29,11 @@ parameters:
     cluster_node02_address: ${_param:openstack_database_node02_address}
     cluster_node03_hostname: ${_param:openstack_database_node03_hostname}
     cluster_node03_address: ${_param:openstack_database_node03_address}
+    galera_max_connections: 400
   linux:
     network:
       interface:
         ens3: ${_param:linux_single_interface}
+  galera:
+    slave:
+      max_connections: ${_param:galera_max_connections}
