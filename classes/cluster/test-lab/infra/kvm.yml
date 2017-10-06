@@ -21,7 +21,7 @@ classes:
 - system.salt.control.cluster.stacklight_server_cluster
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
-- system.salt.control.cluster.cicd_control_cluster
+#- system.salt.control.cluster.cicd_control_cluster
 - cluster.test-lab.cicd.gluster
 - cluster.test-lab.infra
 parameters:
@@ -89,11 +89,11 @@ parameters:
           ram: 3072
           disk_profile: xxlarge
           net_profile: default
-        cicd.control:
-          cpu: 8
-          ram: 8192
-          disk_profile: large
-          net_profile: default
+#        cicd.control:
+#          cpu: 8
+#          ram: 8192
+#          disk_profile: large
+#          net_profile: default
       cluster:
         internal:
           node:

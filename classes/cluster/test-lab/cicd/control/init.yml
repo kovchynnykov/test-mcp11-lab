@@ -143,7 +143,11 @@ parameters:
           version: latest
     network:
       interface:
-        ens3: ${_param:linux_single_interface}
+        ens3:
+          enabled: True
+          type: eth
+          proto: dhcp
+        ens4: ${_param:linux_single_interface}
   docker:
     swarm:
       network:
