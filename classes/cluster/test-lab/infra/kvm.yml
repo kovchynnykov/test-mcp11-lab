@@ -41,7 +41,7 @@ parameters:
       ##Default production sizing
         openstack.control:
           cpu: 4
-          ram: 4096
+          ram: 8192
           disk_profile: small
           net_profile: default
         openstack.database:
