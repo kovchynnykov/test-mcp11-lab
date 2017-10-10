@@ -49,7 +49,8 @@ parameters:
   grafana:
     server:
       database:
-        host: ${_param:stacklight_telemetry_address}
+        host: ${_param:openstack_database_address}
+#        host: ${_param:stacklight_telemetry_address}
   heka:
     aggregator:
       sensu_notification_handler: 'mail'
