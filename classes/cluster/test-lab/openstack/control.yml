@@ -43,3 +43,14 @@ parameters:
     network:
       interface:
         ens3: ${_param:linux_single_interface}
+  nova:
+    controller:
+      workers: 1
+  glance:
+    server:
+      workers: 1
+  cinder:
+    controller:
+      volume_workers: 1
+    volume:
+      volume_workers: 1
