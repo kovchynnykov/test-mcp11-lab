@@ -37,3 +37,4 @@ parameters:
   galera:
     slave:
       max_connections: ${_param:galera_max_connections}
+      innodb_buffer_pool_size: 384M
