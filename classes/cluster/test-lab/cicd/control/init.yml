@@ -46,7 +46,7 @@ parameters:
     glusterfs_node03_address: ${_param:infra_kvm_node03_address}
     keepalived_vip_virtual_router_id: 180
     keepalived_vip_password: X2Ko7dLdcQMTk5gr
-    keepalived_vip_interface: ens3
+    keepalived_vip_interface: ens4
     cluster_vip_address: ${_param:control_vip_address}
     control_vip_address: ${_param:cicd_control_address}
     cluster_public_host: ${_param:control_vip_address}
