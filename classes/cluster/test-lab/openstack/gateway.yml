@@ -18,10 +18,16 @@ parameters:
     primary_first_nic: ens5
     tenant_nic: ens3
     deploy_nic: ens4
+    external_nic: ens6
   linux:
     network:
       bridge: openvswitch
       interface:
+        dhcp_int:
+          enabled: true
+          name: ${_param:deploy_nic}
+          proto: dhcp
+          type: eth
         control-eth:
           enabled: true
           type: eth
@@ -34,36 +40,22 @@ parameters:
           proto: manual
           name: ${_param:tenant_nic}
           mtu: ${_param:interface_mtu}
-        deploy-eth:
+        external-eth:
           enabled: true
           type: eth
           proto: manual
-          name: ${_param:deploy_nic}
+          name: ${_param:external_nic}
           mtu: ${_param:interface_mtu}
         br-floating:
           enabled: true
           type: ovs_bridge
           mtu: ${_param:interface_mtu}
-        float-to-ex:
-          enabled: true
-          type: ovs_port
-          mtu: ${_param:interface_mtu}
-          bridge: br-floating
-        br_mgm:
-          enabled: true
-          type: bridge
-          proto: dhcp
-          mtu: ${_param:interface_mtu}
-          use_interfaces:
-          - ${_param:deploy_nic}
-          use_ovs_ports:
-          - float-to-ex
-        br_ctl:
+        br-mgmt:
           enabled: true
           type: bridge
           proto: static
           address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
+          netmask: 255.255.255.0
           mtu: ${_param:interface_mtu}
           use_interfaces:
           - ${_param:primary_first_nic}
@@ -73,6 +65,19 @@ parameters:
           mtu: ${_param:interface_mtu}
           proto: static
           address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
+          netmask: 255.255.255.0
           use_interfaces:
           - ${_param:tenant_nic}
+        float-to-ex:
+          enabled: true
+          type: ovs_port
+          mtu: ${_param:interface_mtu}
+          bridge: br-floating
+        br-ex:
+          enabled: true
+          type: bridge
+          proto: dhcp
+          use_interfaces:
+          - ${_param:external_nic}
+          use_ovs_ports:
+          - float-to-ex
