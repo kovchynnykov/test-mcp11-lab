@@ -23,7 +23,7 @@ classes:
 - cluster.test-lab.stacklight.proxy
 parameters:
   _param:
-    keepalived_vip_interface: ens3
+    keepalived_vip_interface: ens4
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
@@ -37,4 +37,8 @@ parameters:
   linux:
     network:
       interface:
-        ens3: ${_param:linux_single_interface}
+        ens3:
+          enabled: true
+          type: eth
+          proto: dhcp
+        ens4: ${_param:linux_single_interface}
