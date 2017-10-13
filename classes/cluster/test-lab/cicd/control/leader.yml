@@ -37,3 +37,9 @@ classes:
 
   - cluster.test-lab.infra
   - cluster.test-lab.cicd.control
+
+parameters:
+  gerrit:
+    client:
+      repo:
+        foo: "bar"
