@@ -4,8 +4,8 @@ parameters:
     admin_email: root@localhost
     openstack_version: ocata
     ##Neutron osv/nodvr + dpdk
-    neutron_global_physnet_mtu: 1500
-    neutron_external_mtu: 1500
+    neutron_global_physnet_mtu: 1450
+    neutron_external_mtu: 1450
 
     neutron_enable_qos: False
     neutron_enable_vlan_aware_vms: False
