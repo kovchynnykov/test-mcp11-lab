@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.repo.mcp.extra
+- system.linux.system.repo.sensu
 - cluster.test-lab.infra
 parameters:
   linux:

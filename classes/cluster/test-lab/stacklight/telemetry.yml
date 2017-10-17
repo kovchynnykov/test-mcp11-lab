@@ -3,6 +3,7 @@ classes:
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.extra
+- system.linux.system.repo.sensu
 - system.influxdb.server.single
 - system.influxdb.database.ceilometer
 - system.influxdb.database.stacklight

@@ -3,6 +3,7 @@ classes:
   - system.linux.system.haveged
   - system.linux.system.repo.glusterfs
   - system.linux.system.repo.mcp.extra
+  - system.linux.system.repo.sensu
   - system.glusterfs.client.cluster
   - system.glusterfs.client.volume.aptly
   - system.glusterfs.client.volume.gerrit
