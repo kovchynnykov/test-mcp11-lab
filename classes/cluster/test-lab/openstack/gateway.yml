@@ -81,3 +81,6 @@ parameters:
           - ${_param:external_nic}
           use_ovs_ports:
           - float-to-ex
+  neutron:
+    gateway:
+      global_physnet_mtu: ${_param:neutron_global_physnet_mtu}
